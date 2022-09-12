@@ -19,18 +19,18 @@
 		<title>Travel</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-			<!--
-			CSS
-			============================================= -->
-			<link rel="stylesheet" href="{% static "css/linearicons.css" %}">
-			<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-			<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-			<link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
-			<link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
-			<link rel="stylesheet" href="{% static "css/nice-select.css" %}">
-			<link rel="stylesheet" href="{% static "css/animate.min.css" %}">
-			<link rel="stylesheet" href="{% static "css/owl.carousel.css" %}">
-			<link rel="stylesheet" href="{% static "css/main.css" %}">
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet" href="{% static "css/linearicons.css" %}">
+        <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+        <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+        <link rel="stylesheet" href="{% static "css/nice-select.css" %}">
+        <link rel="stylesheet" href="{% static "css/animate.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/owl.carousel.css" %}">
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
 	</head>
     <body>
         <header id="header">
@@ -39,8 +39,14 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-sm-6 col-6 header-top-left">
                         <ul>
-                            <li><a href="#">Visit Us</a></li>
-                            <li><a href="#">Buy Tickets</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="#">you logged in as {{ request.user.username }}</a></li>
+                                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                            {% else %}
+                                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                                <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+                            {% endif %}
+
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -63,23 +69,18 @@
                     <ul class="nav-menu">
                       <li><a href="{% url 'website:home' %}">Home</a></li>
                       <li><a href="{% url 'website:about' %}">About</a></li>
-                      <li class="menu-has-children"><a href="">Blog</a>
-                        <ul>
-                          <li><a href="{% url 'blog:blog-home' %}">Blog Home</a></li>
-                          <li><a href="{% url 'blog:blog-single' %}">Blog Single</a></li>
-                        </ul>
-                      </li>
-                      <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                              <li><a href="{% url 'website:elements' %}">Elements</a></li>
-                              <li class="menu-has-children"><a href="">Level 2 </a>
-                                <ul>
-                                  <li><a href="#">Item One</a></li>
-                                  <li><a href="#">Item Two</a></li>
-                                </ul>
-                              </li>
-                        </ul>
-                      </li>
+                      <li><a href="{% url 'blog:blog-home' %}">Blog</a></li>
+{#                      <li class="menu-has-children"><a href="">Pages</a>#}
+{#                        <ul>#}
+{#                              <li><a href="{% url 'website:elements' %}">Elements</a></li>#}
+{#                              <li class="menu-has-children"><a href="">Level 2 </a>#}
+{#                                <ul>#}
+{#                                  <li><a href="#">Item One</a></li>#}
+{#                                  <li><a href="#">Item Two</a></li>#}
+{#                                </ul>#}
+{#                              </li>#}
+{#                        </ul>#}
+{#                      </li>#}
                       <li><a href="{% url 'website:contact' %}">Contact</a></li>
                     </ul>
                   </nav><!-- #nav-menu-container -->
