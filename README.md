@@ -1,2 +1,3 @@
 # amirdjangofinalproject
- پروژه پایانی جنگو
+ Django project
+ Simple website
